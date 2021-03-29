@@ -26,23 +26,18 @@ public class TennisGame1 implements TennisGame {
         return scorePlayer1 == scorePlayer2;
     }
 
-    public String switchScore() {
-        String result;
+    public String FirstPoints() {
+
         switch (scorePlayer1) {
             case 0:
-                result = "Love-All";
-                break;
+                return "Love-All";
             case 1:
-                result = "Fifteen-All";
-                break;
+                return "Fifteen-All";
             case 2:
-                result = "Thirty-All";
-                break;
+                return "Thirty-All";
             default:
-                result = "Deuce";
-                break;
+                return "Deuce";
         }
-        return result;
     }
 
     public boolean FourOrHigher() {
@@ -71,43 +66,42 @@ public class TennisGame1 implements TennisGame {
         return message;
     }
 
-    public String tempScoreSwitch(int parameter) {
-        String aux;
-        switch (parameter) {
+    public String ScoreSwitch(int tempScore) {
+
+        switch (tempScore) {
             case 0:
-                aux = "Love";
-                break;
+                return "Love";
             case 1:
-                aux = "Fifteen";
-                break;
+                return "Fifteen";
             case 2:
-                aux = "Thirty";
-                break;
+                return "Thirty";
             case 3:
-                aux = "Forty";
-                break;
+                return "Forty";
             default:
-                aux = "";
-                break;
+                return "";
         }
-        return aux;
+    }
+
+    public String getPoint(String score, int tempScore) {
+        for (int i = 1; i < 3; i++) {
+            if (i == 1) tempScore = scorePlayer1;
+            else {
+                score += "-";
+                tempScore = scorePlayer2;
+            }
+            score += ScoreSwitch(tempScore);
+        }
+        return score;
     }
 
     public String getScore() {
         String score = "";
         int tempScore = 0;
-        if (isTie()) score = switchScore();
+        if (isTie()) score = FirstPoints();
         else if (FourOrHigher()) {
             score = GameMessage();
         } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) tempScore = scorePlayer1;
-                else {
-                    score += "-";
-                    tempScore = scorePlayer2;
-                }
-                score += tempScoreSwitch(tempScore);
-            }
+            score = getPoint(score, tempScore);
         }
         return score;
     }
