@@ -3,8 +3,8 @@ public class TennisGame3 implements TennisGame {
 
     private int scorePlayer2;
     private int scorePlayer1;
-    private String player1Name;
-    private String player2Name;
+    private final String player1Name;
+    private final String player2Name;
     public final String[] points = {"Love", "Fifteen", "Thirty", "Forty"};
 
     public TennisGame3(String player1Name, String player2Name) {
@@ -17,7 +17,7 @@ public class TennisGame3 implements TennisGame {
     }
 
     public boolean isDeuce() {
-        return scorePlayer1 + scorePlayer2 == 6;
+        return (scorePlayer1 + scorePlayer2) == 6;
     }
 
     public boolean isTie() {
@@ -54,7 +54,7 @@ public class TennisGame3 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals("player1"))
+        if (playerName.equals(player1Name))
             this.scorePlayer1 += 1;
         else
             this.scorePlayer2 += 1;
